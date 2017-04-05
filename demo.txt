@@ -1,0 +1,26 @@
+kubectl create -f example/deployment.yaml
+kubectl get thirdpartyresources
+kubectl create -f example/example-etcd-cluster.yaml
+kubectl create -f example/example-etcd-cluster-nodeport-service.json
+export ETCDCTL_API=3
+export ETCDCTL_ENDPOINTS=$(minikube service example-etcd-cluster-client-service --url)
+etcdctl put foo bar
+etcdctl get foo
+
+# resize
+kubectl proxy --port=8080
+cat body.json
+{
+  "apiVersion": "coreos.com/v1",
+  "kind": "EtcdCluster",
+  "metadata": {
+    "name": "example-etcd-cluster",
+    "namespace": "default"
+  },
+  "spec": {
+    "size": 5
+  }
+}
+curl -H 'Content-Type: application/json' -X PUT --data @body.json http://127.0.0.1:8080/apis/coreos.com/v1/namespaces/default/etcdclusters/example-etcd-cluster
+kubectl get pods
+etcdctl get foo

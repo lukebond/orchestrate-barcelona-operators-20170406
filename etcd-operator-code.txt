@@ -1,0 +1,17 @@
+Deployment
+https://github.com/coreos/etcd-operator/blob/master/example/deployment.yaml
+
+TPR creation:
+https://github.com/coreos/etcd-operator/blob/master/pkg/controller/controller.go#L243
+
+ReplicaSets used for backups:
+https://github.com/coreos/etcd-operator/blob/master/pkg/cluster/backup_manager.go#L90
+https://github.com/coreos/etcd-operator/blob/master/pkg/util/k8sutil/backup.go#L165
+
+Observe, Analyse, Act (part of #3):
+https://github.com/coreos/etcd-operator/blob/master/pkg/cluster/cluster.go#L216
+https://github.com/coreos/etcd-operator/blob/master/pkg/cluster/cluster.go#L265
+
+Chaos monkey style tests:
+https://github.com/coreos/etcd-operator/blob/master/pkg/chaos/chaos.go
+https://github.com/coreos/etcd-operator/blob/master/cmd/operator/main.go#L201
